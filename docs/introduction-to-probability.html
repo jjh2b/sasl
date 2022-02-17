@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 2 Introduction to Probability | Forensic Science and Statistics: Version 1.0.2</title>
+  <meta name="description" content="This is the first pass at the forensic science and statistics book. The output format for this example is bookdown::gitbook." />
+  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 2 Introduction to Probability | Forensic Science and Statistics: Version 1.0.2" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="This is the first pass at the forensic science and statistics book. The output format for this example is bookdown::gitbook." />
+  <meta name="github-repo" content="rstudio/bookdown-demo" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 2 Introduction to Probability | Forensic Science and Statistics: Version 1.0.2" />
+  
+  <meta name="twitter:description" content="This is the first pass at the forensic science and statistics book. The output format for this example is bookdown::gitbook." />
+  
+
+<meta name="author" content="Jeff Holt and Joseph Swetonic" />
+
+
+<meta name="date" content="2022-02-13" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="index.html"/>
+<link rel="next" href="joint-probability.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+
+
+<style type="text/css">
+code.sourceCode > span { display: inline-block; line-height: 1.25; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Forensic Science and Statistics</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Welcome</a></li>
+<li class="chapter" data-level="2" data-path="introduction-to-probability.html"><a href="introduction-to-probability.html"><i class="fa fa-check"></i><b>2</b> Introduction to Probability</a></li>
+<li class="chapter" data-level="3" data-path="joint-probability.html"><a href="joint-probability.html"><i class="fa fa-check"></i><b>3</b> Joint Probability</a></li>
+<li class="chapter" data-level="4" data-path="conditional-probability.html"><a href="conditional-probability.html"><i class="fa fa-check"></i><b>4</b> Conditional Probability</a></li>
+<li class="chapter" data-level="5" data-path="probability-rules.html"><a href="probability-rules.html"><i class="fa fa-check"></i><b>5</b> Probability Rules</a></li>
+<li class="chapter" data-level="6" data-path="bayes-rule.html"><a href="bayes-rule.html"><i class="fa fa-check"></i><b>6</b> Bayes Rule</a></li>
+<li class="chapter" data-level="7" data-path="counterintuitive-applications.html"><a href="counterintuitive-applications.html"><i class="fa fa-check"></i><b>7</b> Counterintuitive Applications</a></li>
+<li class="chapter" data-level="8" data-path="graphing-distributions-qualitative-variables.html"><a href="graphing-distributions-qualitative-variables.html"><i class="fa fa-check"></i><b>8</b> Graphing Distributions: Qualitative Variables</a></li>
+<li class="chapter" data-level="9" data-path="graphing-distributions-histograms.html"><a href="graphing-distributions-histograms.html"><i class="fa fa-check"></i><b>9</b> Graphing Distributions: Histograms</a></li>
+<li class="chapter" data-level="10" data-path="graphing-distributions-box-plots.html"><a href="graphing-distributions-box-plots.html"><i class="fa fa-check"></i><b>10</b> Graphing Distributions: Box Plots</a></li>
+<li class="chapter" data-level="11" data-path="graphing-distributions-bar-charts.html"><a href="graphing-distributions-bar-charts.html"><i class="fa fa-check"></i><b>11</b> Graphing Distributions: Bar Charts</a></li>
+<li class="chapter" data-level="12" data-path="sumarizing-distributions-central-tendency.html"><a href="sumarizing-distributions-central-tendency.html"><i class="fa fa-check"></i><b>12</b> Sumarizing Distributions: Central Tendency</a></li>
+<li class="chapter" data-level="13" data-path="sumarizing-distributions-measures-of-central-tendency.html"><a href="sumarizing-distributions-measures-of-central-tendency.html"><i class="fa fa-check"></i><b>13</b> Sumarizing Distributions: Measures of Central Tendency</a></li>
+<li class="chapter" data-level="14" data-path="mean-and-median.html"><a href="mean-and-median.html"><i class="fa fa-check"></i><b>14</b> Mean and Median</a></li>
+<li class="chapter" data-level="15" data-path="variability.html"><a href="variability.html"><i class="fa fa-check"></i><b>15</b> Variability</a></li>
+<li class="chapter" data-level="16" data-path="measures-of-variability.html"><a href="measures-of-variability.html"><i class="fa fa-check"></i><b>16</b> Measures of Variability</a></li>
+<li class="chapter" data-level="17" data-path="shapes-of-distributions.html"><a href="shapes-of-distributions.html"><i class="fa fa-check"></i><b>17</b> Shapes of Distributions</a></li>
+<li class="chapter" data-level="18" data-path="bivariate-data.html"><a href="bivariate-data.html"><i class="fa fa-check"></i><b>18</b> Bivariate Data</a></li>
+<li class="chapter" data-level="19" data-path="correlation.html"><a href="correlation.html"><i class="fa fa-check"></i><b>19</b> Correlation</a></li>
+<li class="chapter" data-level="20" data-path="properties-of-r.html"><a href="properties-of-r.html"><i class="fa fa-check"></i><b>20</b> Properties of <em>r</em></a></li>
+<li class="chapter" data-level="21" data-path="computing-r.html"><a href="computing-r.html"><i class="fa fa-check"></i><b>21</b> Computing <em>r</em></a></li>
+<li class="chapter" data-level="22" data-path="introduction-to-normal-distribution.html"><a href="introduction-to-normal-distribution.html"><i class="fa fa-check"></i><b>22</b> Introduction to Normal Distribution</a></li>
+<li class="chapter" data-level="23" data-path="areas-of-normal-distributions.html"><a href="areas-of-normal-distributions.html"><i class="fa fa-check"></i><b>23</b> Areas of Normal Distributions</a></li>
+<li class="chapter" data-level="24" data-path="standard-normal.html"><a href="standard-normal.html"><i class="fa fa-check"></i><b>24</b> Standard Normal</a></li>
+<li class="chapter" data-level="25" data-path="sampling-distributions.html"><a href="sampling-distributions.html"><i class="fa fa-check"></i><b>25</b> Sampling Distributions</a></li>
+<li class="chapter" data-level="26" data-path="sampling-distribution-mean.html"><a href="sampling-distribution-mean.html"><i class="fa fa-check"></i><b>26</b> Sampling Distribution, Mean</a></li>
+<li class="chapter" data-level="27" data-path="difference-between-means.html"><a href="difference-between-means.html"><i class="fa fa-check"></i><b>27</b> Difference Between Means</a></li>
+<li class="chapter" data-level="28" data-path="sampling-distribution-of-p.html"><a href="sampling-distribution-of-p.html"><i class="fa fa-check"></i><b>28</b> Sampling Distribution of <em>p</em></a></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Forensic Science and Statistics: Version 1.0.2</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="introduction-to-probability" class="section level1">
+<h1><span class="header-section-number">Chapter 2</span> Introduction to Probability</h1>
+<style>
+hide {
+  background-color: #d6d6d6;
+  color: #d6d6d6;
+}
+hide:hover {
+  background-color: white;
+  color: black;
+}
+</style>
+<div id="frequency-tables" class="section level2">
+<h2><span class="header-section-number">2.1</span> Frequency Tables</h2>
+<p>The example from the previous section involves the “likelihood” of arresting the
+correct person based on their hair color. Here we begin the development of
+“probability” which allows us to quantify the notion of likelihood.</p>
+<p>Let’s start by providing some additional context for our example:
+Suppose that the crime described takes place on an island of 1000 people.
+The number of these people with each hair color is given in the table below,
+called a <strong>frequency table.</strong></p>
+<table class="table" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<caption>
+<span id="tab:unnamed-chunk-1">Table 2.1: </span>Hair Color Counts
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+Color
+</th>
+<th style="text-align:right;">
+Count
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Brown
+</td>
+<td style="text-align:right;">
+670
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Blond
+</td>
+<td style="text-align:right;">
+200
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Red
+</td>
+<td style="text-align:right;">
+110
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Green
+</td>
+<td style="text-align:right;">
+20
+</td>
+</tr>
+</tbody>
+</table>
+<p>A <strong>probability</strong> is a number between 0 and 1 that provides a measure of the
+likelihood that something occurs,
+with a larger number indicating greater likelihood.</p>
+<p>Suppose that we select a person from this population at random. To compute
+the probability that this person has brown hair,
+we take the number with brown hair and divide by the number of people:</p>
+<p><span class="math display">\[\mbox{P(Brown hair)} = \frac{670}{1000} = 0.67\]</span></p>
+<p>We use “P(…)” to denote the probability of something. For instance in this case
+<span class="math inline">\(\mbox{P(Brown hair)}\)</span> = “probability of brown hair”.</p>
+<div id="sample-questions" class="section level3">
+<h3><span class="header-section-number">2.1.1</span> Sample Questions</h3>
+<p>Sprinkled thought this book are Sample Questions, which also play the role
+of examples. In the online version, the
+solutions to these questions are hidden. Before looking at the solution
+(by hovering), we recommend that you try to do them yourself!</p>
+<p><strong>1.</strong> What is the probability that a randomly selected person has blond hair?</p>
+<p><strong>Answer:</strong> <hide><span class="math inline">\(P(\text{Blond}) = \frac{200}{1000} = 0.20\)</span>.<hide></p>
+<p><strong>2.</strong> What is the probability that a randomly selected person has red hair?</p>
+<p><strong>Answer:</strong> <hide><span class="math inline">\(P(\text{Red}) = \frac{110}{1000} = 0.11\)</span>.<hide></p>
+<hr />
+</div>
+</div>
+<div id="the-previous-example" class="section level2">
+<h2><span class="header-section-number">2.2</span> The Previous Example</h2>
+<p>The above examples are fine but they do not address the question from the
+previous section.
+In Version 1, we have a brown-haired person on the CCTV and one of the
+670 brown-haired people randomly arrested.
+Thus the probability that the correct person is arrested is</p>
+<p><span class="math display">\[\mbox{P(correct arrest)} = \frac{1}{670} = 0.00149\]</span></p>
+<p>In Version 2 of the example we have a green-haired person on CCTV.
+There are only 20 such people so this
+time the probability that the correct person is arrested is</p>
+<p><span class="math display">\[\mbox{P(correct arrest)} = \frac{1}{20} = 0.05\]</span></p>
+<p>We see that the probability of arresting the correct person if the suspect
+has green hair is greater than the probability of a correct arrest if the
+suspect has brown hair. To measure how much greater, we divide
+the two probabilities</p>
+<p><span class="math display">\[\frac{0.05}{0.00149} = 33.5\]</span></p>
+<p>Thus we see that a correct arrest in Version 2 is 33.5 times as likely as in Version 1.
+However, even in Version 2 there is only a 0.05 probability that the police have
+the correct person, so randomly arresting people based only on hair color is
+not likely to produce the correct outcome in either case!</p>
+<div id="sample-questions-1" class="section level3">
+<h3><span class="header-section-number">2.2.1</span> Sample Questions</h3>
+<p><strong>1.</strong> Suppose CCTV shows a red-haired person committed the robbery, and that
+a random red-haired person is arrested. What is the probability of a correct
+arrest in this instance?</p>
+<p><strong>Answer:</strong> <hide><span class="math inline">\(P(\text{correct arrest}) = \frac{1}{110} = 0.00909\)</span>.<hide></p>
+<p><strong>2.</strong> Determine the number of times greater the likelihood of a correct arrest
+if the culprit has red hair vs having blond hair.</p>
+<p><strong>Answer:</strong> <hide>In the case of a blond-haired person, we have
+<span class="math inline">\(P(\text{correct arrest}) = \frac{1}{200} = 0.005\)</span>. Therefore the ratio
+of probabilities is
+<span class="math inline">\(\frac{0.00909}{0.005} = 1.81818\)</span>
+so a correct arrest for a red-haired culprit is 1.81818 times as likely
+as for a blond-haired culprit.
+<hide></p>
+<hr />
+</div>
+</div>
+<div id="exercises-1" class="section level2">
+<h2><span class="header-section-number">2.3</span> Exercises</h2>
+<ol style="list-style-type: decimal">
+<li><span class="math inline">\(\text{Put exercises here}\)</span></li>
+</ol>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="joint-probability.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["forensic-statistics-book.pdf"],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
